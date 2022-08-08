@@ -5,6 +5,8 @@ import andrzej.cieslik.ac.end_project.user.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LoginController {
@@ -22,7 +24,10 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model, @RequestParam(required=false) Boolean error) {
+        if (error != null) {
+            model.addAttribute("error", error);
+        }
         return "admin/login";
     }
 
